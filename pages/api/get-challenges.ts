@@ -16,7 +16,11 @@ export default async function handler(
     );
   }
 
-  const challenges = await prisma.challenge.findMany();
+  const challenges = await prisma.challenge.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   res.status(200).json({ challenges });
 }

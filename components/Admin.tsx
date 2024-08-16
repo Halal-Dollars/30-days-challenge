@@ -64,6 +64,7 @@ const Admin = () => {
   }, [adminKeyDialogOpen]);
 
   const handleAdminKeySubmit = async (key: string) => {
+    console.log("Admin>>", key, process.env.NEXT_PUBLIC_ADMIN_KEY);
     if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
       localStorage.setItem(
         "admin",

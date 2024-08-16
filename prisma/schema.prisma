@@ -40,6 +40,8 @@ model Challenge {
   acceptSubmission Boolean         @default(false)
   startDate        DateTime        @default(now())
   endDate          DateTime?
+  createdAt        DateTime        @default(now()) @map(name: "created_at")
+  updatedAt        DateTime        @updatedAt @map(name: "updated_at")
   UserChallenge    UserChallenge[]
 }
 
