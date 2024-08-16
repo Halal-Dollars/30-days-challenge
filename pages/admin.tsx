@@ -1,8 +1,7 @@
 import React from "react";
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import JoinBanner from "../components/JoinBanner";
-import Leaderboard from "../components/Leaderboard";
+import Admin from "../components/Admin";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = [
@@ -24,13 +23,12 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Blog = () => {
+const AdminDashboard = () => {
   return (
     <Layout>
-      <JoinBanner />
-      <Leaderboard />
+      <Admin />
     </Layout>
   );
 };
 
-export default Blog;
+export default AdminDashboard;

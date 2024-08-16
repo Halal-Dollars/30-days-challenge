@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  max-width: 1700px;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.spin_dot {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+  margin: -10px;
+  display: inline-block;
+  font-size: 20px;
+  width: 1em;
+  height: 1em;
+}
+
+.spin_blur {
+  clear: both;
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+  position: relative;
+  transition: opacity 0.2s;
+}

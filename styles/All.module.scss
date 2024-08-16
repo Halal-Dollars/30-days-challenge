@@ -1,0 +1,359 @@
+$primary-color: #001f5c;
+$text-color: #99b8f5;
+$main-text: #f9f5ff;
+
+.header {
+  font-size: 24px;
+  background-color: $primary-color;
+  padding: 20px 20px;
+  color: $main-text;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    color: $main-text;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+.footer {
+  background-color: $primary-color;
+  width: 100%;
+  padding: 60px 20px;
+  color: $main-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__subtitle {
+    color: #6695f0;
+    font-size: 14px;
+  }
+
+  &__title {
+    color: #fcfaff;
+    font-size: 48px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  &__desc {
+    color: $main-text;
+    font-size: 16px;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  &__button {
+    background-color: #003db8d7;
+    color: $main-text;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #0237a1;
+    }
+  }
+}
+
+.register {
+  margin: 30px auto;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+
+  &__title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: $primary-color;
+  }
+  &__desc {
+    font-size: 18px;
+    font-weight: 300;
+    color: #475467;
+  }
+
+  &__form {
+    max-width: 450px;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  &__agreement {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #475467;
+
+    input {
+        width: 22px;
+        height: 20px;
+        cursor: pointer;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    background-color: #003eb8;
+    color: $main-text;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #022f8a;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    &__title {
+      font-size: 32px;
+    }
+    &__subtitle {
+      font-size: 14px;
+    }
+    &__desc {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    &__subtitle {
+      font-size: 13px;
+    }
+    &__desc {
+      font-size: 13px;
+    }
+  }
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.join_banner {
+  background-color: #f2f4f7;
+  width: 100%;
+  padding: 60px 20px;
+  color: $main-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__subtitle {
+    color: #003eb8;
+    font-size: 15px;
+  }
+
+  &__title {
+    color: $primary-color;
+    font-size: 48px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  &__desc {
+    color: #475467;
+    font-size: 16px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  &__button {
+    background-color: #003db8d7;
+    color: $main-text;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #0237a1;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    &__title {
+      font-size: 32px;
+    }
+    &__subtitle {
+      font-size: 14px;
+    }
+    &__desc {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    &__subtitle {
+      font-size: 13px;
+    }
+    &__desc {
+      font-size: 13px;
+    }
+  }
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &__title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: $primary-color;
+  }
+
+  &__months {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      color: #003EB8;
+    }
+  }
+}
+
+.table {
+  &__container {
+    max-width: 1200px;
+    max-height: 800px;
+    border-radius: 10px;
+    & * {
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    & thead {
+      & th {
+        background-color: $primary-color;
+        color: $main-text;
+
+        span {
+          color: $main-text !important;
+        }
+      }
+
+      & > tr:nth-child(1) th {
+        font-weight: 500;
+      }
+
+      & > tr:nth-child(2) th {
+        line-height: 1;
+        font-size: 0.75rem;
+        padding-top: 0;
+        padding-bottom: 10px;
+        color: white;
+      }
+    }
+
+    & tbody > tr:first-child {
+      background-color: #CCDCFA !important;
+    }
+
+    & tbody > tr:nth-child(2n + 1) {
+      background-color: #F9FAFB;
+    }
+    & tbody > tr > td:first-child {
+      color: $primary-color !important;
+      font-weight: 600;
+    }
+    & tbody > tr > td {
+      color: #475467 !important;
+    }
+  }
+
+  &__container &__row-group {
+    background-color: var(--greyscale1);
+
+    // increase specificity to overwrite defaults
+    &.prod-deploy-dashboard__row-group--odd tr {
+      background-color: var(--white);
+    }
+
+    & tr:not(:last-child) td {
+      border: none;
+    }
+  }
+
+  // increase specificity to handle odd row case
+  &__container &__row.prod-deploy-dashboard__row--error {
+    background-color: #ffe1e1;
+  }
+}
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &__title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: $primary-color;
+    text-decoration: dotted underline;
+  }
+
+  &__sub_header {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: $primary-color;
+    margin-top: 20px;
+  }
+}
