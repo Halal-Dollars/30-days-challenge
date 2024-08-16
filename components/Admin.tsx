@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [adminKeyDialogOpen, setAdminKeyDialogOpen] = useState(false);
+  const [createChallengeDialog, setCreateChallengeDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [adminPageChallenges, setAdminPageChallenges] = useState<
     ChallengeType[]
@@ -44,7 +45,7 @@ const Admin = () => {
     if (admin) {
       console.log("Acdmin>", admin);
       const { key, expiresIn } = JSON.parse(admin);
-      if (key !== "hey") {
+      if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
         setAdminKeyDialogOpen(true);
         setIsLoggedIn(false);
       } else if (expiresIn > Date.now()) {
@@ -63,7 +64,7 @@ const Admin = () => {
   }, [adminKeyDialogOpen]);
 
   const handleAdminKeySubmit = async (key: string) => {
-    if (key === "hey") {
+    if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
       localStorage.setItem(
         "admin",
         JSON.stringify({
@@ -82,11 +83,15 @@ const Admin = () => {
     setAdminKeyDialogOpen(!adminKeyDialogOpen);
   };
 
-  const createChallenge = async () => {
+  const toggleCreateChallengeDialog = () => {
+    setCreateChallengeDialog(!createChallengeDialog);
+  };
+
+  const handleCreateChallenge = async (key: string) => {
     setIsLoading(true);
     fetch("/api/create-challenge", {
       method: "POST",
-      body: JSON.stringify({ key: "hey" }),
+      body: JSON.stringify({ key }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -127,7 +132,7 @@ const Admin = () => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={createChallenge}
+                onClick={toggleCreateChallengeDialog}
               >
                 Create Challenge
               </Button>
@@ -156,6 +161,42 @@ const Admin = () => {
             }}
           >
             <DialogTitle>Retrieve Unique Code</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="key"
+                name="key"
+                label="Admin Key"
+                type="text"
+                fullWidth
+                variant="standard"
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={toggleDialog}>Cancel</Button>
+              <Button type="submit">Submit</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={createChallengeDialog}
+            onClose={toggleCreateChallengeDialog}
+            PaperProps={{
+              component: "form",
+              onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+                event.preventDefault();
+                const formData = new FormData(event.currentTarget);
+                const formJson = Object.fromEntries(
+                  (formData as any).entries()
+                );
+                const { key } = formJson;
+                handleCreateChallenge(key);
+                toggleCreateChallengeDialog();
+              },
+            }}
+          >
+            <DialogTitle>Create challenge for this month</DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus
