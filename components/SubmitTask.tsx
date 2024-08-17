@@ -295,7 +295,7 @@ const SubmitTask = () => {
             className={styles.register__button}
             disabled={formik.isSubmitting}
           >
-            Register Now
+            Submit Task
           </button>
         </div>
       </div>
