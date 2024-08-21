@@ -125,7 +125,7 @@ const Admin = () => {
           <h3 className={styles.admin__title}>Admin Dashboard</h3>
 
           {/* Create Challenge */}
-          {!thisMothChallengeCreated && (
+          {thisMothChallengeCreated && (
             <>
               <h4 className={styles.admin__sub_header}>
                 Create Challenge for this month
@@ -161,7 +161,7 @@ const Admin = () => {
               },
             }}
           >
-            <DialogTitle>Retrieve Unique Code</DialogTitle>
+            <DialogTitle>Admin Key</DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus

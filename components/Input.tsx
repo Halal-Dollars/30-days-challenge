@@ -40,7 +40,8 @@ const Input = ({
         htmlFor=""
         className={`text-[12px] text-[#344054] font-medium mb-[4px] ${labelClassName}`}
       >
-        {label} {required ? <span className="text-shades-red">*</span> : ""}
+        {label} {required ? <span className="text-shades-red">*</span> : ""}{" "}
+        {labelHelper ? `-- ${labelHelper}` : ""}
       </label>
       <input
         type={type}

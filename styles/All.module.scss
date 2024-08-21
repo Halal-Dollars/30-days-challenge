@@ -101,9 +101,9 @@ $main-text: #f9f5ff;
     color: #475467;
 
     input {
-        width: 22px;
-        height: 20px;
-        cursor: pointer;
+      width: 22px;
+      height: 20px;
+      cursor: pointer;
     }
   }
 
@@ -262,7 +262,7 @@ $main-text: #f9f5ff;
     p {
       font-size: 16px;
       font-weight: 500;
-      color: #003EB8;
+      color: #003eb8;
     }
   }
 }
@@ -273,7 +273,7 @@ $main-text: #f9f5ff;
     max-height: 800px;
     border-radius: 10px;
     & * {
-      font-family: 'Inter', sans-serif !important;
+      font-family: "Inter", sans-serif !important;
     }
 
     & thead {
@@ -283,6 +283,10 @@ $main-text: #f9f5ff;
 
         span {
           color: $main-text !important;
+
+          svg {
+            color: $main-text !important;
+          }
         }
       }
 
@@ -300,11 +304,11 @@ $main-text: #f9f5ff;
     }
 
     & tbody > tr:first-child {
-      background-color: #CCDCFA !important;
+      background-color: #ccdcfa !important;
     }
 
     & tbody > tr:nth-child(2n + 1) {
-      background-color: #F9FAFB;
+      background-color: #f9fafb;
     }
     & tbody > tr > td:first-child {
       color: $primary-color !important;
