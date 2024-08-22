@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
-import { argonVerifier } from "../../utils/password";
+import { verifier } from "../../utils/password";
 
 type ResponseData = {
   uniqueCode?: string;
@@ -28,7 +28,7 @@ export default async function handler(
     });
   }
 
-  const passwordMatch = await argonVerifier(password, user.password);
+  const passwordMatch = await verifier(password, user.password);
 
   if (!passwordMatch) {
     return res.status(400).json({

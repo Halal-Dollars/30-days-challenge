@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
-import {argonHasher} from "../../utils/password";
+import {hasher} from "../../utils/password";
 
 
 type ResponseData = {
@@ -56,7 +56,7 @@ export default async function handler(
 
   const uniqueCode = await getUniqueCode();
 
-  const passwordHash = await argonHasher(password);
+  const passwordHash = await hasher(password);
 
   await prisma.user.create({
     data: {
