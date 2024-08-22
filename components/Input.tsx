@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import HideIcon from "../assets/icons/Hide";
+import ShowIcon from "../assets/icons/Show";
 
 export interface IFormInputProps {
   label?: string;
@@ -32,19 +34,37 @@ const Input = ({
   disabled,
   defaultValue,
   error,
-  type="text",
+  type = "text",
 }: IFormInputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const inputType = type
+    ? type === "password"
+      ? showPassword === true
+        ? "text"
+        : "password"
+      : type
+    : "text";
   return (
     <div className={`w-full flex flex-col items-start mt-3 ${className}`}>
       <label
         htmlFor=""
-        className={`text-[12px] text-[#344054] font-medium mb-[4px] ${labelClassName}`}
+        className={`text-[12px] text-[#344054] flex gap-2 items-center font-medium mb-[4px] ${labelClassName}`}
       >
         {label} {required ? <span className="text-shades-red">*</span> : ""}{" "}
         {labelHelper ? `-- ${labelHelper}` : ""}
+        {type === "password" && (
+          <span className="cursor-pointer text-[25px]" onClick={handleShowPassword}>
+            {showPassword ? <HideIcon /> : <ShowIcon />}
+          </span>
+        )}
       </label>
       <input
-        type={type}
+        type={inputType}
         name={name}
         onChange={onChange}
         onBlur={onBlur}

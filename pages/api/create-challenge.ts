@@ -16,8 +16,6 @@ export default async function handler(
     );
   }
 
-  console.log("Body>>>", req.body);
-
   const { key } = req.body;
   if (key !== process.env.ADMIN_KEY) {
     return res.status(400).json({

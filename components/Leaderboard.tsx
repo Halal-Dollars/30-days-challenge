@@ -351,7 +351,9 @@ const Leaderboard = ({
                     <TableCell align="center">
                       {row?.aggregatedTasks?.noOfClients}
                     </TableCell>
-                    <TableCell align="center">{0}</TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.earningsInDollars}
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (

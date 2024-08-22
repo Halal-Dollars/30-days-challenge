@@ -10,12 +10,13 @@ import {
 import styles from "../styles/All.module.scss";
 import Leaderboard, { ChallengeType } from "./Leaderboard";
 import Loader from "./Loader";
-import Swal from "sweetalert2";
+import UserData from "./UserData";
+import CreateChallenge from "./CreateChallenge";
+import ChangeUserPassword from "./ChangeUserPassword";
 
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [adminKeyDialogOpen, setAdminKeyDialogOpen] = useState(false);
-  const [createChallengeDialog, setCreateChallengeDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [adminPageChallenges, setAdminPageChallenges] = useState<
     ChallengeType[]
@@ -64,7 +65,6 @@ const Admin = () => {
   }, [adminKeyDialogOpen]);
 
   const handleAdminKeySubmit = async (key: string) => {
-    console.log("Admin>>", key, process.env.NEXT_PUBLIC_ADMIN_KEY);
     if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
       localStorage.setItem(
         "admin",
@@ -84,142 +84,63 @@ const Admin = () => {
     setAdminKeyDialogOpen(!adminKeyDialogOpen);
   };
 
-  const toggleCreateChallengeDialog = () => {
-    setCreateChallengeDialog(!createChallengeDialog);
-  };
-
-  const handleCreateChallenge = async (key: string) => {
-    setIsLoading(true);
-    fetch("/api/create-challenge", {
-      method: "POST",
-      body: JSON.stringify({ key }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (res.ok) {
-          Swal.fire({
-            title: "Success!",
-            text: "Challenge Created Successfully.",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: data?.error || "Error creating challenge, please try again",
-            icon: "error",
-            confirmButtonText: "Ok",
-          });
-        }
-      })
-      .finally(() => setIsLoading(false));
-  };
-
   return (
     <>
-      <Loader spinning={isLoading}>
-        <div className={styles.admin}>
+      <div className={styles.admin}>
+        <Loader spinning={isLoading}>
           <h3 className={styles.admin__title}>Admin Dashboard</h3>
 
           {/* Create Challenge */}
           {thisMothChallengeCreated && (
-            <>
-              <h4 className={styles.admin__sub_header}>
-                Create Challenge for this month
-              </h4>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={toggleCreateChallengeDialog}
-              >
-                Create Challenge
-              </Button>
-            </>
+            <CreateChallenge setIsLoading={setIsLoading} />
           )}
-          {/* Leaderboard */}
-          <h4 className={`${styles.admin__sub_header} !mb-[-20px] !mt-[40px]`}>
-            Leaderboard
-          </h4>
+        </Loader>
 
-          <Dialog
-            open={adminKeyDialogOpen}
-            onClose={toggleDialog}
-            PaperProps={{
-              component: "form",
-              onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-                event.preventDefault();
-                const formData = new FormData(event.currentTarget);
-                const formJson = Object.fromEntries(
-                  (formData as any).entries()
-                );
-                const { key } = formJson;
-                handleAdminKeySubmit(key);
-                toggleDialog();
-              },
-            }}
-          >
-            <DialogTitle>Admin Key</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="key"
-                name="key"
-                label="Admin Key"
-                type="text"
-                fullWidth
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={toggleDialog}>Cancel</Button>
-              <Button type="submit">Submit</Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog
-            open={createChallengeDialog}
-            onClose={toggleCreateChallengeDialog}
-            PaperProps={{
-              component: "form",
-              onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-                event.preventDefault();
-                const formData = new FormData(event.currentTarget);
-                const formJson = Object.fromEntries(
-                  (formData as any).entries()
-                );
-                const { key } = formJson;
-                handleCreateChallenge(key);
-                toggleCreateChallengeDialog();
-              },
-            }}
-          >
-            <DialogTitle>Create challenge for this month</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="key"
-                name="key"
-                label="Admin Key"
-                type="text"
-                fullWidth
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={toggleDialog}>Cancel</Button>
-              <Button type="submit">Submit</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      </Loader>
+        {/* Leaderboard */}
+        <h4 className={`${styles.admin__sub_header} !mb-[-20px] !mt-[40px]`}>
+          Leaderboard
+        </h4>
+      </div>
 
       <Leaderboard setAdminPageChallenges={setAdminPageChallenges} />
+      <UserData />
+      <ChangeUserPassword />
+
+      <Dialog
+        open={adminKeyDialogOpen}
+        onClose={toggleDialog}
+        PaperProps={{
+          component: "form",
+          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries((formData as any).entries());
+            const { key } = formJson;
+            handleAdminKeySubmit(key);
+            toggleDialog();
+          },
+        }}
+      >
+        <DialogTitle>Admin Key</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="key"
+            name="key"
+            label="Admin Key"
+            type="text"
+            fullWidth
+            variant="standard"
+            autoComplete="off"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleDialog}>Cancel</Button>
+          <Button type="submit">Submit</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

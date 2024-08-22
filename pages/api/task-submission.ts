@@ -80,9 +80,9 @@ export default async function handler(
       },
     },
   });
-  // if (taskAlreadySubmited) {
-  //   return res.status(400).json({ error: "Task already submitted today" });
-  // }
+  if (taskAlreadySubmited) {
+    return res.status(400).json({ error: "Task already submitted today" });
+  }
 
   // check if userChallenge exists
   let userChallenge = await prisma.userChallenge.findFirst({
@@ -129,14 +129,14 @@ export default async function handler(
     data: {
       userChallengeId: userChallenge.id,
       upworkOutreach: Number(upworkOutreach) || 0,
-      socialMediaPosts: Number(upworkOutreach) || 0,
-      socialMediaEngagements: Number(upworkOutreach) || 0,
-      jobApplications: Number(upworkOutreach) || 0,
-      localOutreach: Number(upworkOutreach) || 0,
-      intlOutreach: Number(upworkOutreach) || 0,
-      ecommerceDeliveredOrders: Number(upworkOutreach) || 0,
-      noOfClients: Number(upworkOutreach) || 0,
-      earningsInDollars: Number(upworkOutreach) || 0,
+      socialMediaPosts: Number(socialMediaPosts) || 0,
+      socialMediaEngagements: Number(socialMediaEngagements) || 0,
+      jobApplications: Number(jobApplications) || 0,
+      localOutreach: Number(localOutreach) || 0,
+      intlOutreach: Number(intlOutreach) || 0,
+      ecommerceDeliveredOrders: Number(ecommerceDeliveredOrders) || 0,
+      noOfClients: Number(noOfClients) || 0,
+      earningsInDollars: Number(earningsInDollars) || 0,
     },
   });
   res.status(200).json({message: "Task submitted successfully"});

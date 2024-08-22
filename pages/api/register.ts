@@ -18,8 +18,6 @@ export default async function handler(
     );
   }
 
-  console.log("req.body>> received request", req.body);
-
   const {
     firstName,
     lastName,

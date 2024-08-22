@@ -178,7 +178,9 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How many jobs did you apply for on Upwork today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.upworkOutreach && formik.errors.upworkOutreach}
+            error={
+              formik.touched.upworkOutreach && formik.errors.upworkOutreach
+            }
           />
           <Input
             className="max-w-full"
@@ -190,7 +192,9 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How many posts did you make across all social media today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.socialMediaPosts && formik.errors.socialMediaPosts}
+            error={
+              formik.touched.socialMediaPosts && formik.errors.socialMediaPosts
+            }
           />
           <Input
             className="max-w-full"
@@ -202,7 +206,10 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How many comments and following across all social media did you make today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.socialMediaEngagements && formik.errors.socialMediaEngagements}
+            error={
+              formik.touched.socialMediaEngagements &&
+              formik.errors.socialMediaEngagements
+            }
           />
           <Input
             className="max-w-full"
@@ -214,7 +221,9 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How many jobs did you apply for today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.jobApplications && formik.errors.jobApplications}
+            error={
+              formik.touched.jobApplications && formik.errors.jobApplications
+            }
           />
           <Input
             className="max-w-full"
@@ -250,7 +259,10 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How many e-commerce deliveries did you make today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.ecommerceDeliveredOrders && formik.errors.ecommerceDeliveredOrders}
+            error={
+              formik.touched.ecommerceDeliveredOrders &&
+              formik.errors.ecommerceDeliveredOrders
+            }
           />
           <Input
             className="max-w-full"
@@ -274,7 +286,10 @@ const SubmitTask = () => {
             onBlur={formik.handleBlur}
             placeholder="How much did you earn across all business models today?"
             disabled={formik.isSubmitting}
-            error={formik.touched.earningsInDollars && formik.errors.earningsInDollars}
+            error={
+              formik.touched.earningsInDollars &&
+              formik.errors.earningsInDollars
+            }
           />
 
           <div className={styles.register__agreement}>
