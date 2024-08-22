@@ -1,14 +1,14 @@
-import argon2 from "argon2";
+import bcrypt from "bcrypt";
 
-async function argonHasher(text: string) {
-  return await argon2.hash(text);
+async function hasher(text: string) {
+  return await bcrypt.hash(text, 10);
 }
 
-async function argonVerifier(text: string, hash: string) {
-  return await argon2.verify(hash, text);
+async function verifier(text: string, hash: string) {
+  return await bcrypt.compare(text, hash);
 }
 
 export {
-  argonHasher,
-  argonVerifier,
+  hasher,
+  verifier,
 };
