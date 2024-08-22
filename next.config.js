@@ -5,6 +5,6 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   outputFileTracingIncludes: {
-    "/": ["./node_modules/argon2/prebuilds/linux-x64/*.musl.*"],
+    "/register": ["./node_modules/argon2/prebuilds/linux-x64/*.musl.*"],
   },
 };
