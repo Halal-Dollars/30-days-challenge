@@ -4,7 +4,4 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
-  outputFileTracingIncludes: {
-    "/register": ["./node_modules/argon2/prebuilds/linux-x64/*.musl.*"],
-  },
 };
