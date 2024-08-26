@@ -183,22 +183,24 @@ const Leaderboard = ({
 
   return challenges.length === 0 ? (
     <Loader spinning={isLoading}>
-      <div className="w-full flex flex-col items-center justify-center m-6">
+      <div className="w-full flex flex-col items-center justify-center my-6 px-3">
         <h4 className={`${styles.leaderboard__title}`}>Leaderboard</h4>
-        <h4 className={`${styles.leaderboard__title} !text-[25px]`}>
+        <h4 className={`${styles.leaderboard__title} sm:!text-[25px] !text-[20px]`}>
           No challenges available
         </h4>
       </div>
     </Loader>
   ) : (
     <div className={styles.leaderboard}>
-      <div className="w-full flex justify-between max-w-[1200px] px-3 mb-3">
+      <div
+        className={styles.leaderboard__header}
+      >
         <h4 className={styles.leaderboard__title}>
           {activeChallenge?.month} {activeChallenge?.year}{" "}
           {activeChallenge?.current ? "(Ongoing)" : ""}
         </h4>
         <Input
-          className="max-w-[300px]"
+          className="max-w-[300px] mt-0"
           type="text"
           placeholder="Search"
           value={search}

@@ -16,7 +16,13 @@ const Footer: React.FC = () => {
       <h4 className={styles.footer__desc}>
         Go through the training videos whenever you need them
       </h4>
-      <button className={styles.footer__button}>Watch training Videos</button>
+      <Link
+        href="https://halaldollars.ng/training-videos"
+        target="_blank"
+        className={styles.footer__button}
+      >
+        Watch training Videos
+      </Link>
     </nav>
   );
 };

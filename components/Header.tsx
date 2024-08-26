@@ -13,10 +13,21 @@ const Header: React.FC = () => {
         Halal Dollars
       </h3>
 
-      <div className="flex gap-6">
-        <Link href="/" className="text-[14px]">Leaderboard</Link>
-        <Link href="/register" className="text-[14px]">Register</Link>
-        <Link href="/submit-task" className="text-[14px]">Submit Task</Link>
+      <div className="flex flex-wrap gap-y-1 gap-x-3.5">
+        <Link href="/" className="text-[14px]">
+          Leaderboard
+        </Link>
+        <Link href="/submit-task" className="text-[14px]">
+          Submit Task
+        </Link>
+        <Link href="/register" className="text-[14px]">
+          Register
+        </Link>
+        {router.pathname !== "admin" && (
+          <Link href="/login" className="text-[14px]">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

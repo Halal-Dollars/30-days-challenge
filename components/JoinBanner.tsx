@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "../styles/All.module.scss";
+import Link from "next/link";
 
 const JoinBanner: React.FC = () => {
-
   return (
     <nav className={styles.join_banner}>
       <p className={styles.join_banner__subtitle}>
@@ -14,9 +14,13 @@ const JoinBanner: React.FC = () => {
       <h4 className={styles.join_banner__desc}>
         Join Halal Dollars Community on WhatsApp
       </h4>
-      <button className={styles.join_banner__button}>
+      <Link
+        href="https://promo.halaldollars.online/hd-promo-step1"
+        target="_blank"
+        className={styles.join_banner__button}
+      >
         Join Halal Dollars Community
-      </button>
+      </Link>
     </nav>
   );
 };
