@@ -4,6 +4,7 @@ import {hasher} from "../../utils/password";
 
 
 type ResponseData = {
+  user?: any;
   uniqueCode?: string;
   error?: string;
 };
@@ -56,7 +57,7 @@ export default async function handler(
 
   const passwordHash = await hasher(password);
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       uniqueCode,
       firstName,
@@ -73,7 +74,10 @@ export default async function handler(
       phoneNumber,
     },
   });
-  res.status(200).json({ uniqueCode });
+
+  delete user.password;
+
+  res.status(200).json({ uniqueCode, user });
 }
 
 export const generateUniqueCode = (options: { length?: number }) => {

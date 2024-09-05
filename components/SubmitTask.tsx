@@ -48,6 +48,9 @@ const SubmitTask = () => {
       ecommerceDeliveredOrders: 0,
       noOfClients: 0,
       earningsInDollars: 0,
+      earningsInNaira: 0,
+      opportunities: 0,
+      jobSecured: 0,
     },
     validationSchema: registerSchema,
     onSubmit: (values, { setSubmitting, resetForm }) => {
@@ -171,7 +174,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Upwork Outreach (Recommended is 5 or more)"
-            labelHelper="1 Outreach = 5pts"
             defaultValue={formik.values.upworkOutreach}
             name="upworkOutreach"
             onChange={formik.handleChange}
@@ -185,7 +187,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Social Media Posts (Recommended is 2)"
-            labelHelper="1 Post = 3pts"
             defaultValue={formik.values.socialMediaPosts}
             name="socialMediaPosts"
             onChange={formik.handleChange}
@@ -199,7 +200,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Social Media Engagement (Recommended is 10)"
-            labelHelper="1 Engagement = 1pt"
             defaultValue={formik.values.socialMediaEngagements}
             name="socialMediaEngagements"
             onChange={formik.handleChange}
@@ -213,8 +213,21 @@ const SubmitTask = () => {
           />
           <Input
             className="max-w-full"
+            label="Social Group Post (2 groups recommended - 1 post per group)"
+            defaultValue={formik.values.socialMediaEngagements}
+            name="socialGroupPost"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="How many comments and following across all social media did you make today?"
+            disabled={formik.isSubmitting}
+            error={
+              formik.touched.socialMediaEngagements &&
+              formik.errors.socialMediaEngagements
+            }
+          />
+          <Input
+            className="max-w-full"
             label="Job Application (Recommended is 5)"
-            labelHelper="1 Application = 5pts"
             defaultValue={formik.values.jobApplications}
             name="jobApplications"
             onChange={formik.handleChange}
@@ -228,7 +241,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Local Outreach (Recommended is 30)"
-            labelHelper="1 Outreach = 2pts"
             defaultValue={formik.values.localOutreach}
             name="localOutreach"
             onChange={formik.handleChange}
@@ -240,7 +252,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Int’l  Outreach (Recommended is 30)"
-            labelHelper="1 Outreach = 3pts"
             defaultValue={formik.values.intlOutreach}
             name="intlOutreach"
             onChange={formik.handleChange}
@@ -251,8 +262,32 @@ const SubmitTask = () => {
           />
           <Input
             className="max-w-full"
+            label="Opportunities"
+            defaultValue={formik.values.opportunities}
+            name="opportunities"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="How many e-commerce deliveries did you make today?"
+            disabled={formik.isSubmitting}
+            error={formik.touched.opportunities && formik.errors.opportunities}
+          />
+          <Input
+            className="max-w-full"
+            label="Job Secured"
+            defaultValue={formik.values.jobSecured}
+            name="jobSecured"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="How many e-commerce deliveries did you make today?"
+            disabled={formik.isSubmitting}
+            error={
+              formik.touched.jobSecured &&
+              formik.errors.jobSecured
+            }
+          />
+          <Input
+            className="max-w-full"
             label="Ecommerce Delivered Orders (Recommended is 5)"
-            labelHelper="1 Order = 5pts"
             defaultValue={formik.values.ecommerceDeliveredOrders}
             name="ecommerceDeliveredOrders"
             onChange={formik.handleChange}
@@ -267,7 +302,6 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Number of Clients"
-            labelHelper="1 Client = 20pts"
             defaultValue={formik.values.noOfClients}
             name="noOfClients"
             onChange={formik.handleChange}
@@ -278,8 +312,7 @@ const SubmitTask = () => {
           />
           <Input
             className="max-w-full"
-            label="Total Earnings in Dollars (Use $1 = N1,500)"
-            labelHelper="$1 = 1pt"
+            label="Total Earnings in Dollars"
             defaultValue={formik.values.earningsInDollars}
             name="earningsInDollars"
             onChange={formik.handleChange}
@@ -289,6 +322,19 @@ const SubmitTask = () => {
             error={
               formik.touched.earningsInDollars &&
               formik.errors.earningsInDollars
+            }
+          />
+          <Input
+            className="max-w-full"
+            label="Total Earnings in Naira"
+            defaultValue={formik.values.earningsInNaira}
+            name="earningsInNaira"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="How much did you earn across all business models today?"
+            disabled={formik.isSubmitting}
+            error={
+              formik.touched.earningsInNaira && formik.errors.earningsInNaira
             }
           />
 

@@ -1,13 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useRouter } from "next/router";
 import Input from "./Input";
 import styles from "../styles/All.module.scss";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import Loader from "./Loader";
+import { useUserStore } from "../store/user";
 
 const Register = () => {
+  const router = useRouter();
   const [agree, setAgree] = React.useState(false);
+
+  const setUser = useUserStore((state) => state.setUser);
+
   const registerSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -71,6 +77,9 @@ const Register = () => {
             icon: "success",
             confirmButtonText: "Ok",
           });
+          console.log('data.user', data?.user);
+          setUser(data?.user);
+          router.push("/dashboard");
           resetForm();
         } else {
           Swal.fire({

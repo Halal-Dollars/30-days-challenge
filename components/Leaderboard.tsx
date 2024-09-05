@@ -43,6 +43,9 @@ type LeaderboardType = {
     ecommerceDeliveredOrders: number;
     noOfClients: number;
     earningsInDollars: number;
+    opportunities: number;
+    jobSecured: number;
+    earningsInNaira: number;
   };
 };
 
@@ -185,16 +188,16 @@ const Leaderboard = ({
     <Loader spinning={isLoading}>
       <div className="w-full flex flex-col items-center justify-center my-6 px-3">
         <h4 className={`${styles.leaderboard__title}`}>Leaderboard</h4>
-        <h4 className={`${styles.leaderboard__title} sm:!text-[25px] !text-[20px]`}>
+        <h4
+          className={`${styles.leaderboard__title} sm:!text-[25px] !text-[20px]`}
+        >
           No challenges available
         </h4>
       </div>
     </Loader>
   ) : (
     <div className={styles.leaderboard}>
-      <div
-        className={styles.leaderboard__header}
-      >
+      <div className={styles.leaderboard__header}>
         <h4 className={styles.leaderboard__title}>
           {activeChallenge?.month} {activeChallenge?.year}{" "}
           {activeChallenge?.current ? "(Ongoing)" : ""}
@@ -265,6 +268,15 @@ const Leaderboard = ({
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
+                    active={sortBy === "socialGroupPost"}
+                    direction={sortBy === "socialGroupPost" ? sortDir : "desc"}
+                    onClick={() => handleSort("socialGroupPost")}
+                  >
+                    Social Group Post
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
                     active={sortBy === "jobApplications"}
                     direction={sortBy === "jobApplications" ? sortDir : "desc"}
                     onClick={() => handleSort("jobApplications")}
@@ -288,6 +300,29 @@ const Leaderboard = ({
                     onClick={() => handleSort("intlOutreach")}
                   >
                     Int'l Outreach
+                  </TableSortLabel>
+                </TableCell>
+
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "opportunities"}
+                    direction={
+                      sortBy === "opportunities" ? sortDir : "desc"
+                    }
+                    onClick={() => handleSort("opportunities")}
+                  >
+                    Opportunities
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "jobSecured"}
+                    direction={
+                      sortBy === "jobSecured" ? sortDir : "desc"
+                    }
+                    onClick={() => handleSort("jobSecured")}
+                  >
+                    Job Secured
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
@@ -321,6 +356,17 @@ const Leaderboard = ({
                     Total Earnings ($)
                   </TableSortLabel>
                 </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "earningsInNaira"}
+                    direction={
+                      sortBy === "earningsInNaira" ? sortDir : "desc"
+                    }
+                    onClick={() => handleSort("earningsInNaira")}
+                  >
+                    Total Earnings (&#8358;)
+                  </TableSortLabel>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -348,6 +394,12 @@ const Leaderboard = ({
                       {row?.aggregatedTasks?.intlOutreach}
                     </TableCell>
                     <TableCell align="center">
+                      {row?.aggregatedTasks?.opportunities}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.jobSecured}
+                    </TableCell>
+                    <TableCell align="center">
                       {row?.aggregatedTasks?.ecommerceDeliveredOrders}
                     </TableCell>
                     <TableCell align="center">
@@ -355,6 +407,9 @@ const Leaderboard = ({
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.earningsInDollars}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.earningsInNaira}
                     </TableCell>
                   </TableRow>
                 ))
@@ -368,7 +423,7 @@ const Leaderboard = ({
             </TableBody>
           </Table>
         </TableContainer>
-        {pagination.total < pagination.pageSize && (
+        {pagination.total > pagination.pageSize && (
           <Pagination
             style={{ marginTop: "1.5rem" }}
             count={Math.ceil(pagination.total / pagination.pageSize)}

@@ -42,23 +42,6 @@ const Admin = () => {
   }, [adminPageChallenges]);
 
   useEffect(() => {
-    const admin = localStorage.getItem("admin");
-    if (admin) {
-      console.log("Acdmin>", admin);
-      const { key, expiresIn } = JSON.parse(admin);
-      if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
-        setAdminKeyDialogOpen(true);
-        setIsLoggedIn(false);
-      } else if (expiresIn > Date.now()) {
-        setIsLoggedIn(true);
-        setAdminKeyDialogOpen(false);
-      }
-    } else if (!isLoggedIn) {
-      setAdminKeyDialogOpen(true);
-    }
-  }, []);
-
-  useEffect(() => {
     if (!adminKeyDialogOpen && !isLoggedIn) {
       setAdminKeyDialogOpen(true);
     }
@@ -66,13 +49,6 @@ const Admin = () => {
 
   const handleAdminKeySubmit = async (key: string) => {
     if (key === process.env.NEXT_PUBLIC_ADMIN_KEY) {
-      localStorage.setItem(
-        "admin",
-        JSON.stringify({
-          key,
-          expiresIn: Date.now() + 1000 * 60 * 60 * 24,
-        })
-      );
       setIsLoggedIn(true);
       setAdminKeyDialogOpen(false);
     } else {

@@ -3,9 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "../styles/All.module.scss";
+import { useUserStore } from "../store/user";
 
 const Header: React.FC = () => {
   const router = useRouter();
+
+  const user = useUserStore((state) => state.user);
 
   return (
     <nav className={styles.header}>
@@ -20,10 +23,16 @@ const Header: React.FC = () => {
         <Link href="/submit-task" className="text-[14px]">
           Submit Task
         </Link>
-        <Link href="/register" className="text-[14px]">
-          Register
-        </Link>
-        {router.pathname !== "admin" && (
+        {user ? (
+          <Link href="/dashboard" className="text-[14px]">
+            Dashboard
+          </Link>
+        ) : (
+          <Link href="/register" className="text-[14px]">
+            Register
+          </Link>
+        )}
+        {!user && (
           <Link href="/login" className="text-[14px]">
             Login
           </Link>

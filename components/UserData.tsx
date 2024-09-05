@@ -16,8 +16,6 @@ import {
 } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "../styles/All.module.scss";
-import IconArrowRight from "../assets/icons/ArrowRight";
-import IconArrowLeft from "../assets/icons/ArrorLeft";
 import Loader from "./Loader";
 import Input from "./Input";
 
@@ -200,7 +198,7 @@ const UserData = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        {pagination.total < pagination.pageSize && (
+        {pagination.total > pagination.pageSize && (
           <Pagination
             style={{ marginTop: "1.5rem" }}
             count={Math.ceil(pagination.total / pagination.pageSize)}
@@ -214,11 +212,11 @@ const UserData = () => {
           <DialogContent>
             <div>
               <h4 className="mb-2">
-                <span className="font-bold">First Name:</span>
+                <span className="font-bold">First Name: </span>
                 <span>{viewUserData?.firstName}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">Last Name:</span>
+                <span className="font-bold">Last Name: </span>
                 <span>{viewUserData?.lastName}</span>
               </h4>
               <h4 className="mb-2">
@@ -226,11 +224,11 @@ const UserData = () => {
                 <span>{viewUserData?.email}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">LinkedIn:</span>
+                <span className="font-bold">LinkedIn: </span>
                 <span>{viewUserData?.linkedInLink}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">Upwork:</span>
+                <span className="font-bold">Upwork: </span>
                 <span>{viewUserData?.upworkLink}</span>
               </h4>
               <h4 className="mb-2">
@@ -250,7 +248,7 @@ const UserData = () => {
                 <span>{viewUserData?.mediumLink}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">Go High Level Account Name:</span>
+                <span className="font-bold">Go High Level Account Name: </span>
                 <span>{viewUserData?.goHighLevelAccountName}</span>
               </h4>
               <h4 className="mb-2">
@@ -258,7 +256,7 @@ const UserData = () => {
                 <span>{viewUserData?.phoneNumber}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">Created At:</span>
+                <span className="font-bold">Created At: </span>
                 <span>{new Date(viewUserData?.createdAt)?.toDateString()}</span>
               </h4>
             </div>

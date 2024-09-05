@@ -18,6 +18,9 @@ type ResponseData = {
       ecommerceDeliveredOrders: Number;
       noOfClients: Number;
       earningsInDollars: Number;
+      opportunities: Number;
+      jobSecured: Number;
+      earningsInNaira: Number;
     };
   }[];
   pagination?: {
@@ -122,6 +125,9 @@ export default async function handler(
             ecommerceDeliveredOrders: true,
             noOfClients: true,
             earningsInDollars: true,
+            opportunities: true,
+            jobSecured: true,
+            earningsInNaira: true,
           },
         },
       },
@@ -140,6 +146,9 @@ export default async function handler(
           acc.ecommerceDeliveredOrders += task.ecommerceDeliveredOrders;
           acc.noOfClients += task.noOfClients;
           acc.earningsInDollars += task.earningsInDollars;
+          acc.opportunities += task.opportunities;
+          acc.jobSecured += task.jobSecured;
+          acc.earningsInNaira += task.earningsInNaira;
           return acc;
         },
         {
@@ -152,6 +161,9 @@ export default async function handler(
           ecommerceDeliveredOrders: 0,
           noOfClients: 0,
           earningsInDollars: 0,
+          opportunities: 0,
+          jobSecured: 0,
+          earningsInNaira: 0,
         }
       );
 
@@ -164,7 +176,7 @@ export default async function handler(
 
     switch (sortBy) {
       case "upworkOutreach":
-        console.log('Log>>>', sortBy, sortDir);
+        console.log("Log>>>", sortBy, sortDir);
         formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
           sortDir === "desc"
             ? b.aggregatedTasks.upworkOutreach -
@@ -239,6 +251,26 @@ export default async function handler(
             : a.aggregatedTasks.earningsInDollars -
               b.aggregatedTasks.earningsInDollars
         );
+      case "opportunities":
+        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+          sortDir === "desc"
+            ? b.aggregatedTasks.opportunities - a.aggregatedTasks.opportunities
+            : a.aggregatedTasks.opportunities - b.aggregatedTasks.opportunities
+        );
+      case "jobSecured":
+        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+          sortDir === "desc"
+            ? b.aggregatedTasks.jobSecured - a.aggregatedTasks.jobSecured
+            : a.aggregatedTasks.jobSecured - b.aggregatedTasks.jobSecured
+        );
+      case "earningsInNaira":
+        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+          sortDir === "desc"
+            ? b.aggregatedTasks.earningsInNaira -
+              a.aggregatedTasks.earningsInNaira
+            : a.aggregatedTasks.earningsInNaira -
+              b.aggregatedTasks.earningsInNaira
+        );
         break;
       default:
         break;
@@ -292,6 +324,9 @@ export default async function handler(
             ecommerceDeliveredOrders: true,
             noOfClients: true,
             earningsInDollars: true,
+            opportunities: true,
+            jobSecured: true,
+            earningsInNaira: true,
           },
         },
       },
@@ -314,6 +349,9 @@ export default async function handler(
           acc.ecommerceDeliveredOrders += task.ecommerceDeliveredOrders;
           acc.noOfClients += task.noOfClients;
           acc.earningsInDollars += task.earningsInDollars;
+          acc.opportunities += task.opportunities;
+          acc.jobSecured += task.jobSecured;
+          acc.earningsInNaira += task.earningsInNaira;
           return acc;
         },
         {
@@ -326,6 +364,9 @@ export default async function handler(
           ecommerceDeliveredOrders: 0,
           noOfClients: 0,
           earningsInDollars: 0,
+          opportunities: 0,
+          jobSecured: 0,
+          earningsInNaira: 0,
         }
       );
 
