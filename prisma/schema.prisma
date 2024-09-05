@@ -75,6 +75,7 @@ model TaskSubmission {
   opportunities            Int           @default(0)
   jobSecured               Int           @default(0)
   earningsInNaira          Int           @default(0)
+  socialGroupPost          Int           @default(0)
 }
 
 // I have these models from prisma, I want to show a leaderboard based on the challenge, that is based on challengeId, I want to show the 

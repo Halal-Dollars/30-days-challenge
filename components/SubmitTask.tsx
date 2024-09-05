@@ -42,6 +42,7 @@ const SubmitTask = () => {
       upworkOutreach: 0,
       socialMediaPosts: 0,
       socialMediaEngagements: 0,
+      socialGroupPost: 0,
       jobApplications: 0,
       localOutreach: 0,
       intlOutreach: 0,
@@ -214,15 +215,15 @@ const SubmitTask = () => {
           <Input
             className="max-w-full"
             label="Social Group Post (2 groups recommended - 1 post per group)"
-            defaultValue={formik.values.socialMediaEngagements}
+            defaultValue={formik.values.socialGroupPost}
             name="socialGroupPost"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="How many comments and following across all social media did you make today?"
             disabled={formik.isSubmitting}
             error={
-              formik.touched.socialMediaEngagements &&
-              formik.errors.socialMediaEngagements
+              formik.touched.socialGroupPost &&
+              formik.errors.socialGroupPost
             }
           />
           <Input

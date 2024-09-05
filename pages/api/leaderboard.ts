@@ -21,6 +21,7 @@ type ResponseData = {
       opportunities: Number;
       jobSecured: Number;
       earningsInNaira: Number;
+      socialGroupPost: Number;
     };
   }[];
   pagination?: {
@@ -128,6 +129,7 @@ export default async function handler(
             opportunities: true,
             jobSecured: true,
             earningsInNaira: true,
+            socialGroupPost: true,
           },
         },
       },
@@ -149,6 +151,7 @@ export default async function handler(
           acc.opportunities += task.opportunities;
           acc.jobSecured += task.jobSecured;
           acc.earningsInNaira += task.earningsInNaira;
+          acc.socialGroupPost += task.socialGroupPost;
           return acc;
         },
         {
@@ -164,6 +167,7 @@ export default async function handler(
           opportunities: 0,
           jobSecured: 0,
           earningsInNaira: 0,
+          socialGroupPost: 0,
         }
       );
 
@@ -272,6 +276,15 @@ export default async function handler(
               b.aggregatedTasks.earningsInNaira
         );
         break;
+      case "socialGroupPost":
+        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+          sortDir === "desc"
+            ? b.aggregatedTasks.socialGroupPost -
+              a.aggregatedTasks.socialGroupPost
+            : a.aggregatedTasks.socialGroupPost -
+              b.aggregatedTasks.socialGroupPost
+        );
+        break;
       default:
         break;
     }
@@ -327,6 +340,7 @@ export default async function handler(
             opportunities: true,
             jobSecured: true,
             earningsInNaira: true,
+            socialGroupPost: true,
           },
         },
       },
@@ -352,6 +366,7 @@ export default async function handler(
           acc.opportunities += task.opportunities;
           acc.jobSecured += task.jobSecured;
           acc.earningsInNaira += task.earningsInNaira;
+          acc.socialGroupPost += task.socialGroupPost;
           return acc;
         },
         {
@@ -367,6 +382,7 @@ export default async function handler(
           opportunities: 0,
           jobSecured: 0,
           earningsInNaira: 0,
+          socialGroupPost: 0,
         }
       );
 

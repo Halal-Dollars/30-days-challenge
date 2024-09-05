@@ -46,6 +46,7 @@ type LeaderboardType = {
     opportunities: number;
     jobSecured: number;
     earningsInNaira: number;
+    socialGroupPost: number;
   };
 };
 
@@ -306,9 +307,7 @@ const Leaderboard = ({
                 <TableCell align="center">
                   <TableSortLabel
                     active={sortBy === "opportunities"}
-                    direction={
-                      sortBy === "opportunities" ? sortDir : "desc"
-                    }
+                    direction={sortBy === "opportunities" ? sortDir : "desc"}
                     onClick={() => handleSort("opportunities")}
                   >
                     Opportunities
@@ -317,9 +316,7 @@ const Leaderboard = ({
                 <TableCell align="center">
                   <TableSortLabel
                     active={sortBy === "jobSecured"}
-                    direction={
-                      sortBy === "jobSecured" ? sortDir : "desc"
-                    }
+                    direction={sortBy === "jobSecured" ? sortDir : "desc"}
                     onClick={() => handleSort("jobSecured")}
                   >
                     Job Secured
@@ -359,9 +356,7 @@ const Leaderboard = ({
                 <TableCell align="center">
                   <TableSortLabel
                     active={sortBy === "earningsInNaira"}
-                    direction={
-                      sortBy === "earningsInNaira" ? sortDir : "desc"
-                    }
+                    direction={sortBy === "earningsInNaira" ? sortDir : "desc"}
                     onClick={() => handleSort("earningsInNaira")}
                   >
                     Total Earnings (&#8358;)
@@ -380,6 +375,9 @@ const Leaderboard = ({
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.socialMediaPosts}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.socialGroupPost}
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.socialMediaEngagements}
