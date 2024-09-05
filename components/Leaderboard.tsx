@@ -231,15 +231,6 @@ const Leaderboard = ({
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "totalPoints"}
-                    direction={sortBy === "totalPoints" ? sortDir : "desc"}
-                    onClick={() => handleSort("totalPoints")}
-                  >
-                    Total Points
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
                     active={sortBy === "upworkOutreach"}
                     direction={sortBy === "upworkOutreach" ? sortDir : "desc"}
                     onClick={() => handleSort("upworkOutreach")}
@@ -369,7 +360,6 @@ const Leaderboard = ({
                 data.map((row, index) => (
                   <TableRow key={index} className="">
                     <TableCell align="center">{`${row?.user?.firstName} ${row?.user?.lastName}`}</TableCell>
-                    <TableCell align="center">{row?.totalPoints}</TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.upworkOutreach}
                     </TableCell>
@@ -377,10 +367,10 @@ const Leaderboard = ({
                       {row?.aggregatedTasks?.socialMediaPosts}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.socialGroupPost}
+                      {row?.aggregatedTasks?.socialMediaEngagements}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.socialMediaEngagements}
+                      {row?.aggregatedTasks?.socialGroupPost}
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.jobApplications}
