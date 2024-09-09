@@ -231,70 +231,24 @@ const Leaderboard = ({
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "upworkOutreach"}
-                    direction={sortBy === "upworkOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("upworkOutreach")}
-                  >
-                    Upwork Outreach
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "socialMediaPosts"}
-                    direction={sortBy === "socialMediaPosts" ? sortDir : "desc"}
-                    onClick={() => handleSort("socialMediaPosts")}
-                  >
-                    Social Media Post
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "socialMediaEngagements"}
+                    active={sortBy === "earningsInDollars"}
                     direction={
-                      sortBy === "socialMediaEngagements" ? sortDir : "desc"
+                      sortBy === "earningsInDollars" ? sortDir : "desc"
                     }
-                    onClick={() => handleSort("socialMediaEngagements")}
+                    onClick={() => handleSort("earningsInDollars")}
                   >
-                    Social Media Engagement
+                    Total Earnings ($)
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "socialGroupPost"}
-                    direction={sortBy === "socialGroupPost" ? sortDir : "desc"}
-                    onClick={() => handleSort("socialGroupPost")}
+                    active={sortBy === "earningsInNaira"}
+                    direction={sortBy === "earningsInNaira" ? sortDir : "desc"}
+                    onClick={() => handleSort("earningsInNaira")}
                   >
-                    Social Group Post
+                    Total Earnings (&#8358;)
                   </TableSortLabel>
                 </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "jobApplications"}
-                    direction={sortBy === "jobApplications" ? sortDir : "desc"}
-                    onClick={() => handleSort("jobApplications")}
-                  >
-                    Job Application
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "localOutreach"}
-                    direction={sortBy === "localOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("localOutreach")}
-                  >
-                    Local Outreach
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "intlOutreach"}
-                    direction={sortBy === "intlOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("intlOutreach")}
-                  >
-                    Int'l Outreach
-                  </TableSortLabel>
-                </TableCell>
-
                 <TableCell align="center">
                   <TableSortLabel
                     active={sortBy === "opportunities"}
@@ -333,24 +287,70 @@ const Leaderboard = ({
                     Number of Clients
                   </TableSortLabel>
                 </TableCell>
+
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "earningsInDollars"}
-                    direction={
-                      sortBy === "earningsInDollars" ? sortDir : "desc"
-                    }
-                    onClick={() => handleSort("earningsInDollars")}
+                    active={sortBy === "upworkOutreach"}
+                    direction={sortBy === "upworkOutreach" ? sortDir : "desc"}
+                    onClick={() => handleSort("upworkOutreach")}
                   >
-                    Total Earnings ($)
+                    Upwork Outreach
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "earningsInNaira"}
-                    direction={sortBy === "earningsInNaira" ? sortDir : "desc"}
-                    onClick={() => handleSort("earningsInNaira")}
+                    active={sortBy === "socialMediaPosts"}
+                    direction={sortBy === "socialMediaPosts" ? sortDir : "desc"}
+                    onClick={() => handleSort("socialMediaPosts")}
                   >
-                    Total Earnings (&#8358;)
+                    Social Media Posts
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "socialMediaEngagements"}
+                    direction={
+                      sortBy === "socialMediaEngagements" ? sortDir : "desc"
+                    }
+                    onClick={() => handleSort("socialMediaEngagements")}
+                  >
+                    Social Media Engagements
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "socialGroupPost"}
+                    direction={sortBy === "socialGroupPost" ? sortDir : "desc"}
+                    onClick={() => handleSort("socialGroupPost")}
+                  >
+                    Social Group Posts
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "jobApplications"}
+                    direction={sortBy === "jobApplications" ? sortDir : "desc"}
+                    onClick={() => handleSort("jobApplications")}
+                  >
+                    Job Applications
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "localOutreach"}
+                    direction={sortBy === "localOutreach" ? sortDir : "desc"}
+                    onClick={() => handleSort("localOutreach")}
+                  >
+                    Local Outreach
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "intlOutreach"}
+                    direction={sortBy === "intlOutreach" ? sortDir : "desc"}
+                    onClick={() => handleSort("intlOutreach")}
+                  >
+                    Int'l Outreach
                   </TableSortLabel>
                 </TableCell>
               </TableRow>
@@ -359,7 +359,29 @@ const Leaderboard = ({
               {!isLoading && data.length ? (
                 data.map((row, index) => (
                   <TableRow key={index} className="">
-                    <TableCell align="center">{`${row?.user?.firstName} ${row?.user?.lastName}`}</TableCell>
+                    <TableCell align="center">
+                      {`${row?.user?.firstName} ${row?.user?.lastName}`}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.earningsInDollars}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.earningsInNaira}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.opportunities}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.jobSecured}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.ecommerceDeliveredOrders}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row?.aggregatedTasks?.noOfClients}
+                    </TableCell>
+
+
                     <TableCell align="center">
                       {row?.aggregatedTasks?.upworkOutreach}
                     </TableCell>
@@ -380,24 +402,6 @@ const Leaderboard = ({
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.intlOutreach}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.opportunities}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.jobSecured}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.ecommerceDeliveredOrders}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.noOfClients}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.earningsInDollars}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.earningsInNaira}
                     </TableCell>
                   </TableRow>
                 ))
