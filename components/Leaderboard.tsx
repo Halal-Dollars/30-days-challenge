@@ -67,7 +67,7 @@ const Leaderboard = ({
     null
   );
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("totalPoints");
+  const [sortBy, setSortBy] = useState("earningsInDollars");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
   const [challengePagination, setChallengePagination] = useState({
