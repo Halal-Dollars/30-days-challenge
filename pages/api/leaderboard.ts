@@ -126,10 +126,10 @@ export default async function handler(
             ecommerceDeliveredOrders: true,
             noOfClients: true,
             earningsInDollars: true,
-            opportunities: true,
-            jobSecured: true,
-            earningsInNaira: true,
-            socialGroupPost: true,
+            // opportunities: true,
+            // jobSecured: true,
+            // earningsInNaira: true,
+            // socialGroupPost: true,
           },
         },
       },
@@ -148,10 +148,10 @@ export default async function handler(
           acc.ecommerceDeliveredOrders += task.ecommerceDeliveredOrders;
           acc.noOfClients += task.noOfClients;
           acc.earningsInDollars += task.earningsInDollars;
-          acc.opportunities += task.opportunities;
-          acc.jobSecured += task.jobSecured;
-          acc.earningsInNaira += task.earningsInNaira;
-          acc.socialGroupPost += task.socialGroupPost;
+          // acc.opportunities += task.opportunities;
+          // acc.jobSecured += task.jobSecured;
+          // acc.earningsInNaira += task.earningsInNaira;
+          // acc.socialGroupPost += task.socialGroupPost;
           return acc;
         },
         {
@@ -164,10 +164,10 @@ export default async function handler(
           ecommerceDeliveredOrders: 0,
           noOfClients: 0,
           earningsInDollars: 0,
-          opportunities: 0,
-          jobSecured: 0,
-          earningsInNaira: 0,
-          socialGroupPost: 0,
+          // opportunities: 0,
+          // jobSecured: 0,
+          // earningsInNaira: 0,
+          // socialGroupPost: 0,
         }
       );
 
@@ -255,35 +255,35 @@ export default async function handler(
             : a.aggregatedTasks.earningsInDollars -
               b.aggregatedTasks.earningsInDollars
         );
-      case "opportunities":
-        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-          sortDir === "desc"
-            ? b.aggregatedTasks.opportunities - a.aggregatedTasks.opportunities
-            : a.aggregatedTasks.opportunities - b.aggregatedTasks.opportunities
-        );
-      case "jobSecured":
-        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-          sortDir === "desc"
-            ? b.aggregatedTasks.jobSecured - a.aggregatedTasks.jobSecured
-            : a.aggregatedTasks.jobSecured - b.aggregatedTasks.jobSecured
-        );
-      case "earningsInNaira":
-        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-          sortDir === "desc"
-            ? b.aggregatedTasks.earningsInNaira -
-              a.aggregatedTasks.earningsInNaira
-            : a.aggregatedTasks.earningsInNaira -
-              b.aggregatedTasks.earningsInNaira
-        );
-        break;
-      case "socialGroupPost":
-        formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-          sortDir === "desc"
-            ? b.aggregatedTasks.socialGroupPost -
-              a.aggregatedTasks.socialGroupPost
-            : a.aggregatedTasks.socialGroupPost -
-              b.aggregatedTasks.socialGroupPost
-        );
+      // case "opportunities":
+      //   formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+      //     sortDir === "desc"
+      //       ? b.aggregatedTasks.opportunities - a.aggregatedTasks.opportunities
+      //       : a.aggregatedTasks.opportunities - b.aggregatedTasks.opportunities
+      //   );
+      // case "jobSecured":
+      //   formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+      //     sortDir === "desc"
+      //       ? b.aggregatedTasks.jobSecured - a.aggregatedTasks.jobSecured
+      //       : a.aggregatedTasks.jobSecured - b.aggregatedTasks.jobSecured
+      //   );
+      // case "earningsInNaira":
+      //   formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+      //     sortDir === "desc"
+      //       ? b.aggregatedTasks.earningsInNaira -
+      //         a.aggregatedTasks.earningsInNaira
+      //       : a.aggregatedTasks.earningsInNaira -
+      //         b.aggregatedTasks.earningsInNaira
+      //   );
+      //   break;
+      // case "socialGroupPost":
+      //   formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+      //     sortDir === "desc"
+      //       ? b.aggregatedTasks.socialGroupPost -
+      //         a.aggregatedTasks.socialGroupPost
+      //       : a.aggregatedTasks.socialGroupPost -
+      //         b.aggregatedTasks.socialGroupPost
+      //   );
         break;
       default:
         break;
@@ -337,10 +337,10 @@ export default async function handler(
             ecommerceDeliveredOrders: true,
             noOfClients: true,
             earningsInDollars: true,
-            opportunities: true,
-            jobSecured: true,
-            earningsInNaira: true,
-            socialGroupPost: true,
+            // opportunities: true,
+            // jobSecured: true,
+            // earningsInNaira: true,
+            // socialGroupPost: true,
           },
         },
       },
@@ -363,10 +363,10 @@ export default async function handler(
           acc.ecommerceDeliveredOrders += task.ecommerceDeliveredOrders;
           acc.noOfClients += task.noOfClients;
           acc.earningsInDollars += task.earningsInDollars;
-          acc.opportunities += task.opportunities;
-          acc.jobSecured += task.jobSecured;
-          acc.earningsInNaira += task.earningsInNaira;
-          acc.socialGroupPost += task.socialGroupPost;
+          // acc.opportunities += task.opportunities;
+          // acc.jobSecured += task.jobSecured;
+          // acc.earningsInNaira += task.earningsInNaira;
+          // acc.socialGroupPost += task.socialGroupPost;
           return acc;
         },
         {
@@ -379,10 +379,10 @@ export default async function handler(
           ecommerceDeliveredOrders: 0,
           noOfClients: 0,
           earningsInDollars: 0,
-          opportunities: 0,
-          jobSecured: 0,
-          earningsInNaira: 0,
-          socialGroupPost: 0,
+          // opportunities: 0,
+          // jobSecured: 0,
+          // earningsInNaira: 0,
+          // socialGroupPost: 0,
         }
       );
 
