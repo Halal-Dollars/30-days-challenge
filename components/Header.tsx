@@ -32,11 +32,6 @@ const Header: React.FC = () => {
             Register
           </Link>
         )}
-        {!user && (
-          <Link href="/login" className="text-[14px]">
-            Login
-          </Link>
-        )}
       </div>
     </nav>
   );

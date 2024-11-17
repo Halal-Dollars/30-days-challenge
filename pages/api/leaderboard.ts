@@ -9,19 +9,15 @@ type ResponseData = {
     };
     totalPoints: Number;
     aggregatedTasks: {
-      upworkOutreach: Number;
-      socialMediaPosts: Number;
-      socialMediaEngagements: Number;
-      jobApplications: Number;
-      localOutreach: Number;
-      intlOutreach: Number;
-      ecommerceDeliveredOrders: Number;
-      noOfClients: Number;
-      earningsInDollars: Number;
-      opportunities: Number;
-      jobSecured: Number;
       earningsInNaira: Number;
-      socialGroupPost: Number;
+      projects: Number;
+      jobSecured: Number;
+      opportunities: Number;
+      coldCalls: Number;
+      coldEmails: Number;
+      coldSms: Number;
+      coldDms: Number;
+      walkIns: Number;
     };
   }[];
   pagination?: {
@@ -64,7 +60,7 @@ export default async function handler(
         current: true,
       },
     });
-    challengeId = challenge.id;
+    challengeId = challenge?.id;
   }
 
   if (!challengeId) {
@@ -116,19 +112,15 @@ export default async function handler(
       },
       TaskSubmission: {
         select: {
-          upworkOutreach: true,
-          socialMediaPosts: true,
-          socialMediaEngagements: true,
-          jobApplications: true,
-          localOutreach: true,
-          intlOutreach: true,
-          ecommerceDeliveredOrders: true,
-          noOfClients: true,
-          earningsInDollars: true,
-          opportunities: true,
-          jobSecured: true,
           earningsInNaira: true,
-          socialGroupPost: true,
+          projects: true,
+          jobSecured: true,
+          opportunities: true,
+          coldCalls: true,
+          coldEmails: true,
+          coldSms: true,
+          coldDms: true,
+          walkIns: true,
         },
       },
     },
@@ -138,35 +130,27 @@ export default async function handler(
   formattedLeaderboard = leaderboardData.map((userChallenge) => {
     const aggregatedTasks = userChallenge.TaskSubmission.reduce(
       (acc, task) => {
-        acc.upworkOutreach += task.upworkOutreach;
-        acc.socialMediaPosts += task.socialMediaPosts;
-        acc.socialMediaEngagements += task.socialMediaEngagements;
-        acc.jobApplications += task.jobApplications;
-        acc.localOutreach += task.localOutreach;
-        acc.intlOutreach += task.intlOutreach;
-        acc.ecommerceDeliveredOrders += task.ecommerceDeliveredOrders;
-        acc.noOfClients += task.noOfClients;
-        acc.earningsInDollars += task.earningsInDollars;
-        acc.opportunities += task.opportunities;
-        acc.jobSecured += task.jobSecured;
         acc.earningsInNaira += task.earningsInNaira;
-        acc.socialGroupPost += task.socialGroupPost;
+        acc.projects += task.projects;
+        acc.jobSecured += task.jobSecured;
+        acc.opportunities += task.opportunities;
+        acc.coldCalls += task.coldCalls;
+        acc.coldEmails += task.coldEmails;
+        acc.coldSms += task.coldSms;
+        acc.coldDms += task.coldDms;
+        acc.walkIns += task.walkIns;
         return acc;
       },
       {
-        upworkOutreach: 0,
-        socialMediaPosts: 0,
-        socialMediaEngagements: 0,
-        jobApplications: 0,
-        localOutreach: 0,
-        intlOutreach: 0,
-        ecommerceDeliveredOrders: 0,
-        noOfClients: 0,
-        earningsInDollars: 0,
-        opportunities: 0,
-        jobSecured: 0,
         earningsInNaira: 0,
-        socialGroupPost: 0,
+        projects: 0,
+        jobSecured: 0,
+        opportunities: 0,
+        coldCalls: 0,
+        coldEmails: 0,
+        coldSms: 0,
+        coldDms: 0,
+        walkIns: 0,
       }
     );
 
@@ -178,95 +162,10 @@ export default async function handler(
   });
 
   if (!sortBy) {
-    sortBy = "earningsInDollars";
+    sortBy = "earningsInNaira";
   }
 
   switch (sortBy) {
-    case "upworkOutreach":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.upworkOutreach - a.aggregatedTasks.upworkOutreach
-          : a.aggregatedTasks.upworkOutreach - b.aggregatedTasks.upworkOutreach
-      );
-      break;
-    case "socialMediaPosts":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.socialMediaPosts -
-            a.aggregatedTasks.socialMediaPosts
-          : a.aggregatedTasks.socialMediaPosts -
-            b.aggregatedTasks.socialMediaPosts
-      );
-      break;
-
-    case "socialMediaEngagements":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.socialMediaEngagements -
-            a.aggregatedTasks.socialMediaEngagements
-          : a.aggregatedTasks.socialMediaEngagements -
-            b.aggregatedTasks.socialMediaEngagements
-      );
-      break;
-    case "jobApplications":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.jobApplications -
-            a.aggregatedTasks.jobApplications
-          : a.aggregatedTasks.jobApplications -
-            b.aggregatedTasks.jobApplications
-      );
-      break;
-    case "localOutreach":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.localOutreach - a.aggregatedTasks.localOutreach
-          : a.aggregatedTasks.localOutreach - b.aggregatedTasks.localOutreach
-      );
-      break;
-    case "intlOutreach":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.intlOutreach - a.aggregatedTasks.intlOutreach
-          : a.aggregatedTasks.intlOutreach - b.aggregatedTasks.intlOutreach
-      );
-      break;
-    case "ecommerceDeliveredOrders":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.ecommerceDeliveredOrders -
-            a.aggregatedTasks.ecommerceDeliveredOrders
-          : a.aggregatedTasks.ecommerceDeliveredOrders -
-            b.aggregatedTasks.ecommerceDeliveredOrders
-      );
-      break;
-    case "noOfClients":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.noOfClients - a.aggregatedTasks.noOfClients
-          : a.aggregatedTasks.noOfClients - b.aggregatedTasks.noOfClients
-      );
-      break;
-    case "earningsInDollars":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.earningsInDollars -
-            a.aggregatedTasks.earningsInDollars
-          : a.aggregatedTasks.earningsInDollars -
-            b.aggregatedTasks.earningsInDollars
-      );
-    case "opportunities":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.opportunities - a.aggregatedTasks.opportunities
-          : a.aggregatedTasks.opportunities - b.aggregatedTasks.opportunities
-      );
-    case "jobSecured":
-      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
-        sortDir === "desc"
-          ? b.aggregatedTasks.jobSecured - a.aggregatedTasks.jobSecured
-          : a.aggregatedTasks.jobSecured - b.aggregatedTasks.jobSecured
-      );
     case "earningsInNaira":
       formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
         sortDir === "desc"
@@ -276,15 +175,62 @@ export default async function handler(
             b.aggregatedTasks.earningsInNaira
       );
       break;
-    case "socialGroupPost":
+    case "projects":
       formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
         sortDir === "desc"
-          ? b.aggregatedTasks.socialGroupPost -
-            a.aggregatedTasks.socialGroupPost
-          : a.aggregatedTasks.socialGroupPost -
-            b.aggregatedTasks.socialGroupPost
+          ? b.aggregatedTasks.projects - a.aggregatedTasks.projects
+          : a.aggregatedTasks.projects - b.aggregatedTasks.projects
       );
       break;
+
+    case "jobSecured":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.jobSecured - a.aggregatedTasks.jobSecured
+          : a.aggregatedTasks.jobSecured - b.aggregatedTasks.jobSecured
+      );
+      break;
+    case "opportunities":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.opportunities - a.aggregatedTasks.opportunities
+          : a.aggregatedTasks.opportunities - b.aggregatedTasks.opportunities
+      );
+      break;
+    case "coldCalls":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.coldCalls - a.aggregatedTasks.coldCalls
+          : a.aggregatedTasks.coldCalls - b.aggregatedTasks.coldCalls
+      );
+      break;
+    case "coldEmails":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.coldEmails - a.aggregatedTasks.coldEmails
+          : a.aggregatedTasks.coldEmails - b.aggregatedTasks.coldEmails
+      );
+      break;
+    case "coldSms":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.coldSms - a.aggregatedTasks.coldSms
+          : a.aggregatedTasks.coldSms - b.aggregatedTasks.coldSms
+      );
+      break;
+    case "coldDms":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.coldDms - a.aggregatedTasks.coldDms
+          : a.aggregatedTasks.coldDms - b.aggregatedTasks.coldDms
+      );
+      break;
+    case "walkIns":
+      formattedLeaderboard = formattedLeaderboard.sort((a, b) =>
+        sortDir === "desc"
+          ? b.aggregatedTasks.walkIns - a.aggregatedTasks.walkIns
+          : a.aggregatedTasks.walkIns - b.aggregatedTasks.walkIns
+      );
     default:
       break;
   }

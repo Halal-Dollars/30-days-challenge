@@ -6,31 +6,110 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
 
+// GHL
 model User {
-  id                     String          @id @default(cuid())
-  email                  String          @unique
-  uniqueCode             String          @unique
+  id                    String                 @id @default(cuid())
+  email                 String                 @unique
+  uniqueCode            String?                @unique // the GHL location (sub account) for the user
+  firstName             String
+  lastName              String
+  fullName              String
+  password              String?
+  phoneNumber           String?
+  city                  String
+  state                 String
+  address               String
+  country               String
+  postalCode            String
+  website               String?
+  timezone              String
+  generatedBy           AccountGenerationType? @default(USER) @map(name: "generated_by")
+  subAccountPaused      Boolean?               @default(false) @map(name: "sub_account_paused")
+  subAccountId          String?                @map(name: "sub_account_id")
+  affiliateReferralCode String?                @map("affiliate_referral_code")
+  ghlAccountGenerated   Boolean                @default(false) @map(name: "ghl_account_generated")
+  ghlAccountGeneratedAt DateTime?              @map(name: "account_generated_at")
+  lastPaymentDate       DateTime?              @map(name: "last_payment_date")
+  createdAt             DateTime               @default(now()) @map(name: "created_at")
+  updatedAt             DateTime               @updatedAt @map(name: "updated_at")
+  transactions          Transaction[]
+  AffiliateRecords      AffiliateRecords[]
+  UserChallenge         UserChallenge[]
+
+  @@map(name: "user")
+}
+
+model Affiliate {
+  id                     String             @id @default(cuid())
+  email                  String             @unique
+  referralCode           String?            @unique // code to be used by the user to refer others
   firstName              String
   lastName               String
-  password               String
-  linkedInLink           String?
-  upworkLink             String?
-  facebookLink           String?
-  twitterLink            String?
-  funnelLink             String?
-  mediumLink             String?
-  goHighLevelAccountName String?
+  fullName               String
+  password               String?
   phoneNumber            String?
-  createdAt              DateTime        @default(now()) @map(name: "created_at")
-  updatedAt              DateTime        @updatedAt @map(name: "updated_at")
-  UserChallenge          UserChallenge[]
+  accountNumber          String?
+  accountName            String?
+  bankCode               String?
+  bankName               String?
+  paystackRecipientCode  String?
+  securityQuestion       String?
+  securityQuestionAnswer String?
+  currentBalance         Decimal            @default(0)
+  totalAmountWithdrawn   Decimal            @default(0)
+  isActive               Boolean?           @default(false)
+  lastSubscriptionDate   DateTime?          @default(now()) @map(name: "last_subscription_date")
+  createdAt              DateTime           @default(now()) @map(name: "created_at")
+  updatedAt              DateTime           @updatedAt @map(name: "updated_at")
+  transactions           Transaction[]
+  AffiliateRecords       AffiliateRecords[]
 
-  @@map(name: "users")
+  @@map(name: "affiliate")
+}
+
+model AffiliateRecords {
+  id          String                @id @default(cuid())
+  userId      String?               @map("user_id")
+  user        User?                 @relation(fields: [userId], references: [id])
+  affiliateId String?               @map("affiliate_id")
+  affiliate   Affiliate?            @relation(fields: [affiliateId], references: [id])
+  type        AFFILIATE_RECORD_TYPE @default(NEW_ACCOUNT)
+  amount      Decimal
+  createdAt   DateTime              @default(now()) @map(name: "created_at")
+  updatedAt   DateTime              @updatedAt @map(name: "updated_at")
+
+  @@map(name: "affiliate_records")
+}
+
+model Transaction {
+  id               String            @id @default(cuid())
+  userId           String?           @map("user_id")
+  user             User?             @relation(fields: [userId], references: [id])
+  affiliateId      String?           @map("affiliate_id")
+  affiliate        Affiliate?        @relation(fields: [affiliateId], references: [id])
+  amount           Decimal
+  transactionNotes String[]
+  status           TransactionStatus @default(PENDING)
+  type             TransactionType   @default(GHL_ACCOUNT)
+  createdAt        DateTime          @default(now()) @map(name: "created_at")
+  updatedAt        DateTime          @updatedAt @map(name: "updated_at")
+
+  @@map(name: "transactions")
+}
+
+model AdminConfig {
+  id        String   @id @default(cuid())
+  key       String
+  value     String
+  details   Json?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "admin_config")
 }
 
 model Challenge {
@@ -41,39 +120,65 @@ model Challenge {
   acceptSubmission Boolean         @default(false)
   startDate        DateTime        @default(now())
   endDate          DateTime?
-  createdAt        DateTime        @default(now()) @map(name: "created_at")
-  updatedAt        DateTime        @updatedAt @map(name: "updated_at")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
   UserChallenge    UserChallenge[]
 }
 
 model UserChallenge {
   id             String           @id @default(uuid())
   userId         String
-  user           User             @relation(fields: [userId], references: [id])
   challengeId    String
-  challenge      Challenge        @relation(fields: [challengeId], references: [id])
   totalPoints    Int              @default(0)
   TaskSubmission TaskSubmission[]
+  challenge      Challenge        @relation(fields: [challengeId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
 
   @@unique([userId, challengeId])
 }
 
 model TaskSubmission {
-  id                       String        @id @default(uuid())
-  userChallengeId          String
-  userChallenge            UserChallenge @relation(fields: [userChallengeId], references: [id])
-  date                     DateTime      @default(now())
-  upworkOutreach           Int           @default(0)
-  socialMediaPosts         Int           @default(0)
-  socialMediaEngagements   Int           @default(0)
-  jobApplications          Int           @default(0)
-  localOutreach            Int           @default(0)
-  intlOutreach             Int           @default(0)
-  ecommerceDeliveredOrders Int           @default(0)
-  noOfClients              Int           @default(0)
-  earningsInDollars        Int           @default(0)
-  opportunities            Int           @default(0)
-  jobSecured               Int           @default(0)
-  earningsInNaira          Int           @default(0)
-  socialGroupPost          Int           @default(0)
+  id              String        @id @default(uuid())
+  userChallengeId String
+  date            DateTime      @default(now())
+  earningsInNaira Int           @default(0)
+  projects        Int           @default(0)
+  jobSecured      Int           @default(0)
+  opportunities   Int           @default(0)
+  coldCalls       Int           @default(0) @map("cold_calls")
+  coldEmails      Int           @default(0) @map("cold_emails")
+  coldSms         Int           @default(0) @map("cold_sms")
+  coldDms         Int           @default(0) @map("cold_dms")
+  walkIns         Int           @default(0) @map("walk_ins")
+  userChallenge   UserChallenge @relation(fields: [userChallengeId], references: [id])
+}
+
+enum AccountType {
+  AFFILIATE
+  GHL_USER
+  BOTH
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum AccountGenerationType {
+  ADMIN
+  USER
+}
+
+enum TransactionType {
+  GHL_ACCOUNT
+  GHL_ACCOUNT_RENEWAL
+  AFFILIATE_REWARD_PAYMENT
+  AFFILIATE_PAYMENT
+  AFFILIATE_PAYMENT_RENEWAL
+}
+
+enum AFFILIATE_RECORD_TYPE {
+  NEW_ACCOUNT
+  RENEWAL
 }

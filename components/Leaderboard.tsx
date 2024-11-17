@@ -34,19 +34,15 @@ type LeaderboardType = {
   };
   totalPoints: number;
   aggregatedTasks: {
-    upworkOutreach: number;
-    socialMediaPosts: number;
-    socialMediaEngagements: number;
-    jobApplications: number;
-    localOutreach: number;
-    intlOutreach: number;
-    ecommerceDeliveredOrders: number;
-    noOfClients: number;
-    earningsInDollars: number;
-    opportunities: number;
-    jobSecured: number;
-    earningsInNaira: number;
-    socialGroupPost: number;
+    earningsInNaira: Number;
+    projects: Number;
+    jobSecured: Number;
+    opportunities: Number;
+    coldCalls: Number;
+    coldEmails: Number;
+    coldSms: Number;
+    coldDms: Number;
+    walkIns: Number;
   };
 };
 
@@ -67,7 +63,7 @@ const Leaderboard = ({
     null
   );
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("earningsInDollars");
+  const [sortBy, setSortBy] = useState("earningsInNaira");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
   const [challengePagination, setChallengePagination] = useState({
@@ -231,22 +227,20 @@ const Leaderboard = ({
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "earningsInDollars"}
-                    direction={
-                      sortBy === "earningsInDollars" ? sortDir : "desc"
-                    }
-                    onClick={() => handleSort("earningsInDollars")}
-                  >
-                    Total Earnings ($)
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
                     active={sortBy === "earningsInNaira"}
                     direction={sortBy === "earningsInNaira" ? sortDir : "desc"}
                     onClick={() => handleSort("earningsInNaira")}
                   >
                     Total Earnings (&#8358;)
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel
+                    active={sortBy === "projects"}
+                    direction={sortBy === "projects" ? sortDir : "desc"}
+                    onClick={() => handleSort("projects")}
+                  >
+                    Projects
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
@@ -269,88 +263,48 @@ const Leaderboard = ({
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "ecommerceDeliveredOrders"}
-                    direction={
-                      sortBy === "ecommerceDeliveredOrders" ? sortDir : "desc"
-                    }
-                    onClick={() => handleSort("ecommerceDeliveredOrders")}
+                    active={sortBy === "coldCalls"}
+                    direction={sortBy === "coldCalls" ? sortDir : "desc"}
+                    onClick={() => handleSort("coldCalls")}
                   >
-                    Ecommerce Delivered Orders
+                    Cold Calls
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "noOfClients"}
-                    direction={sortBy === "noOfClients" ? sortDir : "desc"}
-                    onClick={() => handleSort("noOfClients")}
+                    active={sortBy === "coldEmails"}
+                    direction={sortBy === "coldEmails" ? sortDir : "desc"}
+                    onClick={() => handleSort("coldEmails")}
                   >
-                    Number of Clients
+                    Cold Emails
                   </TableSortLabel>
                 </TableCell>
 
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "upworkOutreach"}
-                    direction={sortBy === "upworkOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("upworkOutreach")}
+                    active={sortBy === "coldSms"}
+                    direction={sortBy === "coldSms" ? sortDir : "desc"}
+                    onClick={() => handleSort("coldSms")}
                   >
-                    Upwork Outreach
+                    Cold SMS
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "socialMediaPosts"}
-                    direction={sortBy === "socialMediaPosts" ? sortDir : "desc"}
-                    onClick={() => handleSort("socialMediaPosts")}
+                    active={sortBy === "coldDms"}
+                    direction={sortBy === "coldDms" ? sortDir : "desc"}
+                    onClick={() => handleSort("coldDms")}
                   >
-                    Social Media Posts
+                    Cold DMs
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center">
                   <TableSortLabel
-                    active={sortBy === "socialMediaEngagements"}
-                    direction={
-                      sortBy === "socialMediaEngagements" ? sortDir : "desc"
-                    }
-                    onClick={() => handleSort("socialMediaEngagements")}
+                    active={sortBy === "walkIns"}
+                    direction={sortBy === "walkIns" ? sortDir : "desc"}
+                    onClick={() => handleSort("walkIns")}
                   >
-                    Social Media Engagements
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "socialGroupPost"}
-                    direction={sortBy === "socialGroupPost" ? sortDir : "desc"}
-                    onClick={() => handleSort("socialGroupPost")}
-                  >
-                    Social Group Posts
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "jobApplications"}
-                    direction={sortBy === "jobApplications" ? sortDir : "desc"}
-                    onClick={() => handleSort("jobApplications")}
-                  >
-                    Job Applications
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "localOutreach"}
-                    direction={sortBy === "localOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("localOutreach")}
-                  >
-                    Local Outreach
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">
-                  <TableSortLabel
-                    active={sortBy === "intlOutreach"}
-                    direction={sortBy === "intlOutreach" ? sortDir : "desc"}
-                    onClick={() => handleSort("intlOutreach")}
-                  >
-                    Int'l Outreach
+                    Walk Ins
                   </TableSortLabel>
                 </TableCell>
               </TableRow>
@@ -363,45 +317,32 @@ const Leaderboard = ({
                       {`${row?.user?.firstName} ${row?.user?.lastName}`}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.earningsInDollars}
+                      {String(row?.aggregatedTasks?.earningsInNaira)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.earningsInNaira}
+                      {String(row?.aggregatedTasks?.projects)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.opportunities}
+                      {String(row?.aggregatedTasks?.jobSecured)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.jobSecured}
+                      {String(row?.aggregatedTasks?.opportunities)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.ecommerceDeliveredOrders}
+                      {String(row?.aggregatedTasks?.coldCalls)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.noOfClients}
+                      {String(row?.aggregatedTasks?.coldEmails)}
                     </TableCell>
 
-
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.upworkOutreach}
+                      {String(row?.aggregatedTasks?.coldSms)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.socialMediaPosts}
+                      {String(row?.aggregatedTasks?.coldDms)}
                     </TableCell>
                     <TableCell align="center">
-                      {row?.aggregatedTasks?.socialMediaEngagements}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.socialGroupPost}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.jobApplications}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.localOutreach}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row?.aggregatedTasks?.intlOutreach}
+                      {String(row?.aggregatedTasks?.walkIns)}
                     </TableCell>
                   </TableRow>
                 ))

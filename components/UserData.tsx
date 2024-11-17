@@ -23,13 +23,7 @@ type UserDataType = {
   email: string;
   firstName: string;
   lastName: string;
-  linkedInLink: string;
-  upworkLink: string;
-  facebookLink: string;
-  twitterLink: string;
-  funnelLink: string;
-  mediumLink: string;
-  goHighLevelAccountName: string;
+  subAccountId: string;
   phoneNumber: string;
   createdAt: string | Date;
 };
@@ -224,32 +218,8 @@ const UserData = () => {
                 <span>{viewUserData?.email}</span>
               </h4>
               <h4 className="mb-2">
-                <span className="font-bold">LinkedIn: </span>
-                <span>{viewUserData?.linkedInLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Upwork: </span>
-                <span>{viewUserData?.upworkLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Facebook: </span>
-                <span>{viewUserData?.facebookLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Twitter: </span>
-                <span>{viewUserData?.twitterLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Funnel: </span>
-                <span>{viewUserData?.funnelLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Medium: </span>
-                <span>{viewUserData?.mediumLink}</span>
-              </h4>
-              <h4 className="mb-2">
-                <span className="font-bold">Go High Level Account Name: </span>
-                <span>{viewUserData?.goHighLevelAccountName}</span>
+                <span className="font-bold">Sub Account ID: </span>
+                <span>{viewUserData?.subAccountId}</span>
               </h4>
               <h4 className="mb-2">
                 <span className="font-bold">Phone Number: </span>

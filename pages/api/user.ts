@@ -6,13 +6,7 @@ type ResponseData = {
     email: string;
     firstName: string;
     lastName: string;
-    linkedInLink: string;
-    upworkLink: string;
-    facebookLink: string;
-    twitterLink: string;
-    funnelLink: string;
-    mediumLink: string;
-    goHighLevelAccountName: string;
+    subAccountId: string;
     phoneNumber: string;
     createdAt: string | Date;
   }[];
@@ -69,13 +63,7 @@ export default async function handler(
       email: true,
       firstName: true,
       lastName: true,
-      linkedInLink: true,
-      upworkLink: true,
-      facebookLink: true,
-      twitterLink: true,
-      funnelLink: true,
-      mediumLink: true,
-      goHighLevelAccountName: true,
+      subAccountId: true,
       phoneNumber: true,
       createdAt: true,
     },
