@@ -20,15 +20,24 @@ const Header: React.FC = () => {
         <Link href="/" className="text-[14px]">
           Leaderboard
         </Link>
-        <Link href="/submit-task" className="text-[14px]">
+        <Link
+          href="https://halal-dollars-ghl.vercel.app/submit-task"
+          className="text-[14px]"
+        >
           Submit Task
         </Link>
         {user ? (
-          <Link href="/dashboard" className="text-[14px]">
+          <Link
+            href="https://halal-dollars-ghl.vercel.app/dashboard"
+            className="text-[14px]"
+          >
             Dashboard
           </Link>
         ) : (
-          <Link href="/register" className="text-[14px]">
+          <Link
+            href="https://halal-dollars-ghl.vercel.app"
+            className="text-[14px]"
+          >
             Register
           </Link>
         )}
