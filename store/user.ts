@@ -5,6 +5,7 @@ interface User {
   name: string;
   email: string;
   token: string;
+  userType: "admin" | "user";
 }
 
 interface UserStore {

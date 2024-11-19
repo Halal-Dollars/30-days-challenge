@@ -2,14 +2,14 @@ import React from "react";
 import Layout from "../components/Layout";
 import dynamic from "next/dynamic";
 
-const Admin = dynamic(() => import("../components/Admin"), {
+const AdminLogin = dynamic(() => import("../components/AdminLogin"), {
   ssr: false,
 });
 
 const AdminDashboard = () => {
   return (
     <Layout>
-      <Admin />
+      <AdminLogin />
     </Layout>
   );
 };
