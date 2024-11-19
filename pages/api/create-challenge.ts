@@ -15,14 +15,6 @@ export default async function handler(
       `The HTTP ${req.method} method is not supported at this route.`
     );
   }
-
-  const { key } = req.body;
-  if (key !== process.env.ADMIN_KEY) {
-    return res.status(400).json({
-      error: "Invalid admin key",
-    });
-  }
-
   const date = new Date();
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
