@@ -9,32 +9,45 @@ const CreateChallenge = ({
   setIsLoading: (val: boolean) => void;
 }) => {
   const handleCreateChallenge = async () => {
-    setIsLoading(true);
-    fetch("/api/create-challenge", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (res.ok) {
-          Swal.fire({
-            title: "Success!",
-            text: "Challenge Created Successfully.",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: data?.error || "Error creating challenge, please try again",
-            icon: "error",
-            confirmButtonText: "Ok",
-          });
-        }
-      })
-      .finally(() => setIsLoading(false));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        fetch("/api/create-challenge", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(async (res) => {
+            const data = await res.json();
+            if (res.ok) {
+              Swal.fire({
+                title: "Success!",
+                text: "Challenge Created Successfully.",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+            } else {
+              Swal.fire({
+                title: "Error!",
+                text:
+                  data?.error || "Error creating challenge, please try again",
+                icon: "error",
+                confirmButtonText: "Ok",
+              });
+            }
+          })
+          .finally(() => setIsLoading(false));
+      }
+    });
   };
 
   return (
