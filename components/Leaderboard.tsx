@@ -194,6 +194,7 @@ const Leaderboard = ({
     </Loader>
   ) : (
     <div className={styles.leaderboard}>
+      <h4 className={styles.join_banner__title}>Leaderboard</h4>
       <div className={styles.leaderboard__header}>
         <h4 className={styles.leaderboard__title}>
           {activeChallenge?.month} {activeChallenge?.year}{" "}

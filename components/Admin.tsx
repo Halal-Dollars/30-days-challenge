@@ -10,9 +10,7 @@ import {
 import styles from "../styles/All.module.scss";
 import Leaderboard, { ChallengeType } from "./Leaderboard";
 import Loader from "./Loader";
-import UserData from "./UserData";
 import CreateChallenge from "./CreateChallenge";
-import ChangeUserPassword from "./ChangeUserPassword";
 
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,8 +77,6 @@ const Admin = () => {
       </div>
 
       <Leaderboard setAdminPageChallenges={setAdminPageChallenges} />
-      <UserData />
-      <ChangeUserPassword />
 
       <Dialog
         open={adminKeyDialogOpen}

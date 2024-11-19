@@ -6,7 +6,7 @@ const JoinBanner: React.FC = () => {
   return (
     <nav className={styles.join_banner}>
       <p className={styles.join_banner__subtitle}>
-        New to Halal Dollars $500 in 30 Days Challenge?
+        New to Halal Dollars (&#8358;)1M in 30 Days Challenge?
       </p>
       <h4 className={styles.join_banner__title}>
         Join the Community to Get Started
