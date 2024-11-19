@@ -15,7 +15,7 @@ const JoinBanner: React.FC = () => {
         Join Halal Dollars Community on WhatsApp
       </h4>
       <Link
-        href="https://promo.halaldollars.online/hd-promo-step1"
+        href="https://halaldollars.ng/community"
         target="_blank"
         className={styles.join_banner__button}
       >
