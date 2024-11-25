@@ -318,7 +318,11 @@ const Leaderboard = ({
                       {`${row?.user?.firstName} ${row?.user?.lastName}`}
                     </TableCell>
                     <TableCell align="center">
-                      {String(row?.aggregatedTasks?.earningsInNaira)}
+                      {row?.aggregatedTasks?.earningsInNaira
+                        ? Number(
+                            row?.aggregatedTasks?.earningsInNaira
+                          )?.toLocaleString()
+                        : "---"}
                     </TableCell>
                     <TableCell align="center">
                       {String(row?.aggregatedTasks?.projects)}
