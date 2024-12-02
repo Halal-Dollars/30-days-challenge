@@ -1,7 +1,10 @@
 import {
   Button,
+  MenuItem,
   Pagination,
   Paper,
+  Select,
+  SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
@@ -122,7 +125,7 @@ const Leaderboard = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [activeChallenge, pagination.page, sortDir, sortBy, search]);
+  }, [activeChallenge, pagination, sortDir, sortBy, search]);
 
   const onPageChange = (page: number) => {
     setPagination((prev) => ({ ...prev, page }));
@@ -181,6 +184,15 @@ const Leaderboard = ({
 
   const debouncedHandleSearch = useDebounce(handleSearch, 1000);
 
+  const handleChange = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
+    setPagination({
+      ...pagination,
+      pageSize: Number(event.target.value),
+    });
+    setDataChanges((prev) => !prev);
+  };
+
   return challenges.length === 0 ? (
     <Loader spinning={isLoading}>
       <div className="w-full flex flex-col items-center justify-center my-6 px-3">
@@ -217,6 +229,7 @@ const Leaderboard = ({
           <Table stickyHeader>
             <TableHead>
               <TableRow>
+                <TableCell>Position</TableCell>
                 <TableCell>
                   <TableSortLabel
                     active={sortBy === "name"}
@@ -314,6 +327,9 @@ const Leaderboard = ({
               {!isLoading && data.length ? (
                 data.map((row, index) => (
                   <TableRow key={index} className="">
+                    <TableCell>
+                      {index + 1 + pagination.page * pagination.pageSize}
+                    </TableCell>
                     <TableCell align="center">
                       {`${row?.user?.firstName} ${row?.user?.lastName}`}
                     </TableCell>
@@ -361,14 +377,28 @@ const Leaderboard = ({
             </TableBody>
           </Table>
         </TableContainer>
-        {pagination.total > pagination.pageSize && (
-          <Pagination
-            style={{ marginTop: "1.5rem" }}
-            count={Math.ceil(pagination.total / pagination.pageSize)}
-            page={pagination.page + 1}
-            onChange={(_, page) => onPageChange(page - 1)}
-          />
-        )}
+        <div className="w-full max-w-[1200px] flex flex-row items-center justify-between mt-3">
+          <div className="flex flex-row items-center gap-3">
+            <p>Rows per page: </p>
+            <Select
+              value={pagination.pageSize.toString()}
+              onChange={handleChange}
+              className="h-[40px]"
+            >
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={30}>30</MenuItem>
+              <MenuItem value={50}>50</MenuItem>
+            </Select>
+          </div>
+          {pagination.total > pagination.pageSize && (
+            <Pagination
+              style={{ marginTop: "1.5rem" }}
+              count={Math.ceil(pagination.total / pagination.pageSize)}
+              page={pagination.page + 1}
+              onChange={(_, page) => onPageChange(page - 1)}
+            />
+          )}
+        </div>
 
         <div className={styles.leaderboard__months}>
           <Button
