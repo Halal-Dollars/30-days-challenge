@@ -32,8 +32,7 @@ export type ChallengeType = {
 
 type LeaderboardType = {
   user: {
-    firstName: string;
-    lastName: string;
+    uniqueCode: string;
   };
   totalPoints: number;
   aggregatedTasks: {
@@ -331,7 +330,7 @@ const Leaderboard = ({
                       {index + 1 + pagination.page * pagination.pageSize}
                     </TableCell>
                     <TableCell align="center">
-                      {`${row?.user?.firstName} ${row?.user?.lastName}`}
+                      {row?.user?.uniqueCode}
                     </TableCell>
                     <TableCell align="center">
                       {row?.aggregatedTasks?.earningsInNaira

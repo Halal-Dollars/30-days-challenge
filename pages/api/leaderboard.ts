@@ -4,8 +4,7 @@ import prisma from "../../lib/prisma";
 type ResponseData = {
   leaderboard?: {
     user: {
-      firstName: string;
-      lastName: string;
+      uniqueCode: string;
     };
     totalPoints: Number;
     aggregatedTasks: {
@@ -106,8 +105,7 @@ export default async function handler(
     include: {
       user: {
         select: {
-          firstName: true,
-          lastName: true,
+          uniqueCode: true,
         },
       },
       TaskSubmission: {
